@@ -4,6 +4,16 @@ import '../styles/global.css';
 const containerClass = `
 min-h-screen bg-white dark:bg-gray-800 
 text-gray-900 dark:text-gray-100`
+
+const page = {
+	title: 'Jun\'s Blog - Blackhodl Universe',
+	description: 'This is my blog about my journey learning Astro.',
+	keywords: ['Software', 'AI', 'Web3', 'Blockchain', 'Fintech'],
+	author: 'Jun',
+	image: 'https://blackhodl.xyz/favicon.svg',
+	ogImage: 'https://blackhodl.xyz/favicon.svg',
+	ogTitle: 'Jun\'s Blog - Blackhodl Universe',
+}
 ---
 
 <!doctype html>
@@ -13,7 +23,13 @@ text-gray-900 dark:text-gray-100`
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Jun's Blog - Blackhodl Universe</title>
+		<title>{page.title}</title>
+		<meta name="description" content={page.description} />
+		<meta name="keywords" content={page.keywords.join(', ')} />
+		<meta name="author" content={page.author} />
+		<meta property="og:image" content={page.image} />
+		<meta property="og:title" content={page.ogTitle} />
+		<meta property="og:description" content={page.description} />
 	</head>
 	<body class={containerClass}>
 		<slot />
