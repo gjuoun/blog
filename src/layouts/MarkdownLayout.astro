@@ -1,15 +1,16 @@
 ---
 import Layout, { type PageProps } from "./Layout.astro";
 
-type Frontmatter = PageProps & {
+export type MarkdownPageProps = PageProps & {
   pubDate: Date;
   image: {
     url: string;
     alt: string;
   };
+  url: string;
 };
 
-const { frontmatter } = Astro.props as { frontmatter: Frontmatter };
+const { frontmatter } = Astro.props as { frontmatter: MarkdownPageProps };
 ---
 
 <Layout {...frontmatter}>
