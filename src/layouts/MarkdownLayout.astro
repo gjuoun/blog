@@ -14,15 +14,13 @@ const { frontmatter } = Astro.props as { frontmatter: MarkdownPageProps };
 ---
 
 <Layout {...frontmatter}>
-  <div
-    id="post"
-    class="max-w-xl mx-auto mt-12 p-8 bg-white dark:bg-gray-900 rounded-xl shadow-lg "
+  <article
+    id={frontmatter.url}
+    class="max-w-xl mx-auto mt-12 p-8 bg-white dark:bg-gray-900 rounded-xl shadow-lg prose dark:prose-invert"
   >
     <h1>{frontmatter.title}</h1>
-    <p>Published on: {frontmatter.pubDate.toString().slice(0, 10)}</p>
-    <p>Written by {frontmatter.author}</p>
+    <p>{frontmatter.pubDate.toString().slice(0, 10)}</p>
     <img src={frontmatter.image.url} alt={frontmatter.title} />
     <slot />
-    <div></div>
-  </div></Layout
->
+  </article>
+</Layout>

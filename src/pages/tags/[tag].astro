@@ -1,4 +1,5 @@
 ---
+import BlogPost from "../../components/BlogPost.astro";
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -24,14 +25,18 @@ const filteredPosts = posts.filter((post: any) =>
 ---
 
 <Layout>
-  <p>Posts tagged with {tag}</p>
-  <ul>
+  <div
+    class="grid grid-flow-row gap-4 max-w-xl mx-auto mt-12 p-8 bg-white dark:bg-gray-900 rounded-xl shadow-lg"
+  >
+    <div>
+      <h1 class="text-2xl font-bold">
+        Posts tagged with <pre class="inline-block">{tag}</pre>
+      </h1>
+    </div>
     {
       filteredPosts.map((post: any) => (
-        <li>
-          <a href={post.url}>{post.frontmatter.title}</a>
-        </li>
+        <BlogPost frontmatter={post.frontmatter} />
       ))
     }
-  </ul>
+  </div>
 </Layout>

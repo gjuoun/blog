@@ -1,4 +1,15 @@
-# About Jun
+---
+layout: ../layouts/MarkdownLayout.astro
+title: 'About Jun'
+description: 'A brief introduction to Jun.'
+author: 'Jun Guo'
+
+pubDate: 2022-07-01
+image:
+    url: 'https://green-wall.leoku.dev/api/og/share/gjuoun'
+    alt: 'Jun Guo'
+tags: ["about", "bio", "work experience", "education"]
+---
 
 ## Bio
 
@@ -12,7 +23,6 @@ Jun thrives in collaborative environments, working closely with data teams and d
 
 - **Senior Developer II, Mistplay** | Feb 2022 - Present
 - **Senior Developer, Curbie Cars** | May 2021 - Feb 2022
-- **Team Lead, Sumer Inc.** | Sep 2020 - May 2021
 - **Full-stack Developer, Affinio** | Jul 2020 - May 2021
 - **IBM Canada** | Jun 2019 - Oct 2019
 
@@ -22,4 +32,4 @@ Jun thrives in collaborative environments, working closely with data teams and d
 
 ---
 
-*Last updated: December 2024* 
+*Last updated: July 2025* 

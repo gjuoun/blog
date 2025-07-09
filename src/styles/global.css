@@ -1,5 +1,2 @@
 @import "tailwindcss";
-
-@layer components {
-
-}
+@plugin "@tailwindcss/typography";
