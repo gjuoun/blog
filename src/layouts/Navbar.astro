@@ -1,0 +1,57 @@
+---
+import { Icon } from "astro-icon/components";
+
+const routes = [
+  {
+    name: "Home",
+    href: "/",
+  },
+  {
+    name: "Blog",
+    href: "/blog",
+  },
+  {
+    name: "About",
+    href: "/about",
+  },
+];
+
+const socials = [
+  {
+    name: "github",
+    href: "https://github.com/gjuoun",
+  },
+  {
+    name: "linkedin",
+    href: "https://www.linkedin.com/in/gjuoun/",
+  },
+];
+---
+
+<div
+  id="navbar"
+  class="max-w-xl mx-auto mt-0 bg-white dark:bg-gray-900 rounded-b-xl shadow-lg"
+>
+  <ul
+    class="grid grid-flow-col grid-cols-[1fr_1fr_1fr_min-content] place-items-center"
+  >
+    {
+      routes.map((route) => (
+        <li class="py-4">
+          <a href={route.href}>{route.name}</a>
+        </li>
+      ))
+    }
+    <li class="py-4">
+      <div class="flex gap-2 px-4">
+        {
+          socials.map((social) => (
+            <a href={social.href} target="_blank" rel="noopener noreferrer">
+              <Icon name={social.name} class="w-6 h-6" />
+            </a>
+          ))
+        }
+      </div>
+    </li>
+  </ul>
+</div>
