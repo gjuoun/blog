@@ -12,6 +12,7 @@ export type MarkdownPageProps = {
     url: string;
     alt: string;
   };
+  location?: string;
   tags?: string[];
 };
 
@@ -27,31 +28,41 @@ const { frontmatter } = Astro.props as { frontmatter: MarkdownPageProps };
     id={frontmatter.title}
     class="max-w-xl mx-auto mt-12 p-8 bg-white dark:bg-gray-900 rounded-xl shadow-lg prose dark:prose-invert"
   >
+    <!-- title -->
     <h1>{frontmatter.title}</h1>
-    <p>
-      {frontmatter.pubDate.toString().slice(0, 10)}
-    </p>
+    <!-- author and location -->
+    <div class="flex flex-col gap-0 text-gray-500">
+      {frontmatter.author && <p class="mb-0">{frontmatter.author} </p>}
+      <p class="mt-0">
+        Written on {frontmatter.pubDate.toString().slice(0, 10)}
+        {frontmatter.location && <span> at {frontmatter.location}</span>}
+      </p>
+    </div>
+    <!-- image -->
     {
       frontmatter.image && (
         <img src={frontmatter.image.url} alt={frontmatter.title} />
       )
     }
-
+    <!-- content -->
     <slot />
 
-    {frontmatter.tags && frontmatter.tags.length > 0 && (
-      <>
-      <hr />
-      <div class="flex flex-row gap-1">
-        Tags: {
-          frontmatter.tags.map((tag) => (
-            <a class="text-gray-500" href={`/tags/${tag}`}>
-              {tag}
-            </a>
-          ))
-          } - view all tags <a href="/tags">here</a>
-        </div>
-      </>
-    )}
+    <!-- tags -->
+    {
+      frontmatter.tags && frontmatter.tags.length > 0 && (
+        <>
+          <hr />
+          <div class="flex flex-row gap-1">
+            Tags:{" "}
+            {frontmatter.tags.map((tag) => (
+              <a class="text-gray-500" href={`/tags/${tag}`}>
+                {tag}
+              </a>
+            ))}{" "}
+            - view all tags <a href="/tags">here</a>
+          </div>
+        </>
+      )
+    }
   </article>
 </Layout>

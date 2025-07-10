@@ -3,6 +3,7 @@ layout: ../../layouts/MarkdownLayout.astro
 title: 'Why I’m Holding 0.1 Bitcoin for My Kids'
 description: 'A short story about why I keep 0.1 bitcoin for my kids'
 author: 'Jun Guo'
+location: 'Montreal, Canada'
 
 pubDate: 2025-07-09
 # image:

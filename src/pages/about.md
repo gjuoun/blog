@@ -2,7 +2,7 @@
 layout: ../layouts/MarkdownLayout.astro
 title: 'About Jun'
 description: 'A brief introduction to Jun.'
-author: 'Jun Guo'
+# author: 'Jun Guo'
 
 pubDate: 2025-07-09
 
