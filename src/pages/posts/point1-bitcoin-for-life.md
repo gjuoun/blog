@@ -27,5 +27,5 @@ I used to think gold was the ultimate safe haven, but Bitcoin’s changed my min
 
 ## Why 0.1 BTC?
 
-At $10,900 today, 0.1 BTC is affordable yet meaningful. If Bitcoin hits $500,000 by 2035, it’s $50,000—a nest egg for my kids’ dreams. Sure, it’s volatile, and regulations could shift, but its adoption and scarcity make it a bet I’m willing to take for their future.
+At $10,900 today, 0.1 BTC is affordable yet meaningful. If Bitcoin hits $1 million by 2035, it’s $100,000—a nest egg for my kids’ dreams. Sure, it’s volatile, and regulations could shift, but its adoption and scarcity make it a bet I’m willing to take for their future.
 
