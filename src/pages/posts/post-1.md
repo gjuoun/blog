@@ -3,7 +3,7 @@ layout: ../../layouts/MarkdownLayout.astro
 title: 'My First Blog Post'
 description: 'This is the first post of my new Astro blog.'
 author: 'Jun Guo'
-url: /posts/my-first-post
+# url: /posts/my-first-post
 
 pubDate: 2022-07-01
 image:

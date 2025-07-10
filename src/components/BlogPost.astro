@@ -1,12 +1,11 @@
 ---
-import type { MarkdownPageProps } from "../layouts/MarkdownLayout.astro";
+import type { LoadedFile } from "../pages/blog.astro";
 
-const { frontmatter } = Astro.props as { frontmatter: MarkdownPageProps };
-console.log(frontmatter);
+const { frontmatter, url } = Astro.props as LoadedFile;
 ---
 
 <a
-  href={frontmatter.url}
+  href={url}
   class="rounded-xl p-6 bg-white dark:bg-gray-900 shadow-gray-100 shadow-md dark:shadow-gray-800"
 >
   <h1>{frontmatter.title}</h1>
