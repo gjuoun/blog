@@ -4,7 +4,7 @@ title: 'Why I’m Holding 0.1 Bitcoin for My Kids'
 description: 'A short story about why I keep 0.1 bitcoin for my kids'
 author: 'Jun Guo'
 
-pubDate: 2025-07-09
+pubDate: 2025-07-08
 # image:
 #     url: 'https://docs.astro.build/assets/rose.webp'
 #     alt: 'The Astro logo on a dark background with a pink glow.'
