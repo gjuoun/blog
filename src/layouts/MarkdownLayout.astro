@@ -39,8 +39,9 @@ const { frontmatter } = Astro.props as { frontmatter: MarkdownPageProps };
 
     <slot />
 
-    <hr />
     {frontmatter.tags && frontmatter.tags.length > 0 && (
+      <>
+      <hr />
       <div class="flex flex-row gap-1">
         Tags: {
           frontmatter.tags.map((tag) => (
@@ -48,8 +49,9 @@ const { frontmatter } = Astro.props as { frontmatter: MarkdownPageProps };
               {tag}
             </a>
           ))
-        } - view all tags <a href="/tags">here</a>
-      </div>
+          } - view all tags <a href="/tags">here</a>
+        </div>
+      </>
     )}
   </article>
 </Layout>
