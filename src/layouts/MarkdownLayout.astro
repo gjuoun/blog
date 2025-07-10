@@ -33,10 +33,13 @@ const { frontmatter } = Astro.props as { frontmatter: MarkdownPageProps };
     <!-- author and location -->
     <div class="flex flex-col gap-0 text-gray-500">
       {frontmatter.author && <p class="mb-0">{frontmatter.author} </p>}
-      <p class="mt-0">
-        Written on {frontmatter.pubDate.toString().slice(0, 10)}
-        {frontmatter.location && <span> at {frontmatter.location}</span>}
-      </p>
+      {
+        frontmatter.pubDate && (
+          <p class="mt-0">
+            Written on {frontmatter.pubDate.toString().slice(0, 10)}
+          </p>
+        )
+      }
     </div>
     <!-- image -->
     {
@@ -51,15 +54,14 @@ const { frontmatter } = Astro.props as { frontmatter: MarkdownPageProps };
     {
       frontmatter.tags && frontmatter.tags.length > 0 && (
         <>
-          <hr />
-          <div class="flex flex-row gap-1">
-            Tags:{" "}
+          <div class="flex flex-row gap-1 text-sm">
+            tags: [
             {frontmatter.tags.map((tag) => (
               <a class="text-gray-500" href={`/tags/${tag}`}>
                 {tag}
               </a>
-            ))}{" "}
-            - view all tags <a href="/tags">here</a>
+            ))}
+            <a href="/tags"> all</a>]
           </div>
         </>
       )
