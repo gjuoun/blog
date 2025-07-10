@@ -12,6 +12,7 @@ export type MarkdownPageProps = {
     url: string;
     alt: string;
   };
+  tags?: string[];
 };
 
 const { frontmatter } = Astro.props as { frontmatter: MarkdownPageProps };
@@ -27,12 +28,26 @@ const { frontmatter } = Astro.props as { frontmatter: MarkdownPageProps };
     class="max-w-xl mx-auto mt-12 p-8 bg-white dark:bg-gray-900 rounded-xl shadow-lg prose dark:prose-invert"
   >
     <h1>{frontmatter.title}</h1>
-    <p>{frontmatter.pubDate.toString().slice(0, 10)}</p>
+    <p>
+      {frontmatter.pubDate.toString().slice(0, 10)}
+    </p>
     {
       frontmatter.image && (
         <img src={frontmatter.image.url} alt={frontmatter.title} />
       )
     }
+
     <slot />
+
+    <hr />
+    <div class="flex flex-row gap-1">
+      Tags: {
+        frontmatter.tags?.map((tag) => (
+          <a class="text-gray-500" href={`/tags/${tag}`}>
+            {tag}
+          </a>
+        ))
+      } - view all tags <a href="/tags">here</a>
+    </div>
   </article>
 </Layout>
