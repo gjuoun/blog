@@ -8,7 +8,7 @@ pubDate: 2025-07-09
 image:
     url: 'https://docs.astro.build/assets/rose.webp'
     alt: 'The Astro logo on a dark background with a pink glow.'
-tags: ["astro", "blogging", "learning in public"]
+tags: ["bitcoin", "crypto", "investment", "life"]
 ---
 
 As a tech-savvy parent, I’ve chosen to hold 0.1 Bitcoin for my kids’ future. Here’s why I believe this small investment could make a big difference, based on Bitcoin’s track record, growing institutional support, and its edge over traditional assets like gold.
