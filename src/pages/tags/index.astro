@@ -1,0 +1,23 @@
+---
+import Layout from "../../layouts/Layout.astro";
+const allPosts = Object.values(
+  import.meta.glob("../posts/*.md", { eager: true }),
+);
+const tags = [
+  ...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat()),
+];
+
+console.log(tags);
+---
+
+<Layout title="Tags" description="Tags" author="Jun Guo">
+  <div
+    id="tags-container"
+    class="max-w-xl mx-auto mt-12 p-8 bg-white dark:bg-gray-900 rounded-xl shadow-lg prose dark:prose-invert"
+  >
+    <h1 class="text-2xl font-bold">Tags</h1>
+    <div class="flex flex-wrap gap-2">
+      {tags.map((tag) => <a href={`/tags/${tag}`}>{tag}</a>)}
+    </div>
+  </div>
+</Layout>
