@@ -33,7 +33,7 @@ const socials = [
   class="max-w-xl mx-auto mt-0 bg-white dark:bg-gray-900 rounded-b-xl shadow-lg"
 >
   <ul
-    class="grid grid-flow-col grid-cols-[1fr_1fr_1fr_min-content] place-items-center"
+    class="grid grid-flow-col grid-cols-[1fr_1fr_1fr_max-content] place-items-center"
   >
     {
       routes.map((route) => (
@@ -44,6 +44,15 @@ const socials = [
     }
     <li class="py-4">
       <div class="flex gap-2 px-4">
+        <div class="grid grid-flow-col gap-1 items-center">
+          <a href="/" class="col-span-1">
+            <span class="text-blue-400">EN</span>
+          </a>
+          <span class="col-span-1">|</span>
+          <a href="/" class="col-span-1">
+            <span>中文</span>
+          </a>
+        </div>
         {
           socials.map((social) => (
             <a href={social.href} target="_blank" rel="noopener noreferrer">
