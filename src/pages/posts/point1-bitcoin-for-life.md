@@ -5,9 +5,9 @@ description: 'A short story about why I keep 0.1 bitcoin for my kids'
 author: 'Jun Guo'
 
 pubDate: 2025-07-09
-image:
-    url: 'https://docs.astro.build/assets/rose.webp'
-    alt: 'The Astro logo on a dark background with a pink glow.'
+# image:
+#     url: 'https://docs.astro.build/assets/rose.webp'
+#     alt: 'The Astro logo on a dark background with a pink glow.'
 tags: ["bitcoin", "crypto", "investment", "life"]
 ---
 
