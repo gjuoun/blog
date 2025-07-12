@@ -2,40 +2,74 @@
 import BlogPost from "../../components/BlogPost.astro";
 import Layout from "../../layouts/Layout.astro";
 import Card from "../../components/Card.astro";
+import type { MarkdownPageProps } from "../../layouts/MarkdownLayout.astro";
+
+type LoadedFile = {
+  frontmatter: MarkdownPageProps;
+  url: string;
+};
 
 export async function getStaticPaths() {
   const allPosts = Object.values(
     import.meta.glob("../posts/*.md", { eager: true }),
-  );
+  ) as LoadedFile[];
 
-  const tags = [
-    ...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat()),
-  ];
+  // Create a map of tags to their associated posts for better performance
+  const tagToPostsMap = new Map<string, LoadedFile[]>();
+  
+  allPosts.forEach((post) => {
+    post.frontmatter.tags?.forEach((tag) => {
+      if (!tagToPostsMap.has(tag)) {
+        tagToPostsMap.set(tag, []);
+      }
+      tagToPostsMap.get(tag)!.push(post);
+    });
+  });
 
-  return tags.map((tag) => ({
+  // Return only the filtered posts for each tag instead of all posts
+  return Array.from(tagToPostsMap.entries()).map(([tag, posts]) => ({
     params: { tag },
-    props: { posts: allPosts },
+    props: { posts },
   }));
 }
 
+interface Props {
+  posts: LoadedFile[];
+}
+
 const { tag } = Astro.params;
-const { posts } = Astro.props;
-const filteredPosts = posts.filter((post: any) =>
-  post.frontmatter.tags?.includes(tag),
-);
+const { posts } = Astro.props as Props;
 ---
 
-<Layout>
+<Layout 
+  title={`Posts tagged with ${tag}`}
+  description={`All blog posts tagged with ${tag}`}
+  author="Jun Guo"
+>
   <Card grid>
-    <div>
-      <h1 class="text-2xl font-bold">
-        Posts tagged with <pre class="inline-block">{tag}</pre>
+    <div class="mb-4">
+      <h1 class="text-2xl font-bold mb-2">
+        Posts tagged with <span class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded font-mono text-blue-600 dark:text-blue-400">{tag}</span>
       </h1>
+      <p class="text-gray-600 dark:text-gray-400">
+        {posts.length} {posts.length === 1 ? 'post' : 'posts'} found
+      </p>
     </div>
-    {
-      filteredPosts.map((post: any) => (
-        <BlogPost frontmatter={post.frontmatter} />
+    
+    {posts.length > 0 ? (
+      posts.map((post) => (
+        <BlogPost 
+          frontmatter={post.frontmatter} 
+          url={post.url}
+        />
       ))
-    }
+    ) : (
+      <div class="text-center py-8 text-gray-500 dark:text-gray-400">
+        <p>No posts found with this tag.</p>
+        <a href="/tags" class="text-blue-600 dark:text-blue-400 hover:underline">
+          ← Back to all tags
+        </a>
+      </div>
+    )}
   </Card>
 </Layout>

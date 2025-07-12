@@ -8,15 +8,21 @@ export interface Props {
   grid?: boolean;
 }
 
-const { class: className, id, prose = false, grid = false, ...props } = Astro.props;
+const {
+  class: className,
+  id,
+  prose = false,
+  grid = false,
+  ...props
+} = Astro.props;
 
 const finalClasses = clsx(
-  "max-w-xl mx-auto mt-12 p-8 bg-white dark:bg-gray-900 rounded-xl shadow-lg",
+  "p-8 bg-white dark:bg-gray-900 rounded-xl shadow-lg",
   {
     "prose dark:prose-invert": prose,
     "grid grid-flow-row gap-4": grid,
   },
-  className
+  className,
 );
 ---
 
