@@ -1,6 +1,7 @@
 ---
 import BlogPost from "../components/BlogPost.astro";
 import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
 import type { MarkdownPageProps } from "../layouts/MarkdownLayout.astro";
 
 const allPosts: LoadedFile[] = Object.values(
@@ -14,13 +15,11 @@ export type LoadedFile = {
 ---
 
 <Layout>
-  <div
-    class="grid grid-flow-row gap-4 max-w-xl mx-auto mt-12 p-8 bg-white dark:bg-gray-900 rounded-xl shadow-lg"
-  >
+  <Card grid>
     {
       allPosts.map((post: any) => (
         <BlogPost url={post.url} frontmatter={post.frontmatter} />
       ))
     }
-  </div>
+  </Card>
 </Layout>

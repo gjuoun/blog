@@ -1,0 +1,21 @@
+---
+export interface Props {
+  class?: string;
+  id?: string;
+  prose?: boolean;
+  grid?: boolean;
+}
+
+const { class: className, id, prose = false, grid = false, ...props } = Astro.props;
+
+const baseClasses = "max-w-xl mx-auto mt-12 p-8 bg-white dark:bg-gray-900 rounded-xl shadow-lg";
+const proseClasses = prose ? " prose dark:prose-invert" : "";
+const gridClasses = grid ? " grid grid-flow-row gap-4" : "";
+const additionalClasses = className ? ` ${className}` : "";
+
+const finalClasses = `${baseClasses}${proseClasses}${gridClasses}${additionalClasses}`;
+---
+
+<div class={finalClasses} id={id} {...props}>
+  <slot />
+</div>
