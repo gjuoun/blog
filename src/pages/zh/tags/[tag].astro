@@ -1,8 +1,8 @@
 ---
-import BlogPost from "../../components/BlogPost.astro";
-import Card from "../../components/Card.astro";
-import Layout from "../../layouts/Layout.astro";
-import type { MarkdownPageProps } from "../../layouts/MarkdownLayout.astro";
+import BlogPost from "../../../components/BlogPost.astro";
+import Card from "../../../components/Card.astro";
+import Layout from "../../../layouts/Layout.astro";
+import type { MarkdownPageProps } from "../../../layouts/MarkdownLayout.astro";
 
 type LoadedFile = {
   frontmatter: MarkdownPageProps;
@@ -51,14 +51,14 @@ const { posts } = Astro.props as Props;
   <Card grid>
     <div class="mb-4">
       <h1 class="text-2xl font-bold mb-2">
-        Posts tagged with <span
+        标签为 <span
           class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded font-mono text-blue-600 dark:text-blue-400"
           >{tag}</span
         >
       </h1>
       <p class="text-gray-600 dark:text-gray-400">
         {posts.length}
-        {posts.length === 1 ? "post" : "posts"} found
+        篇博文
       </p>
     </div>
 
@@ -69,12 +69,12 @@ const { posts } = Astro.props as Props;
         ))
       ) : (
         <div class="text-center py-8 text-gray-500 dark:text-gray-400">
-          <p>No posts found with this tag.</p>
+          <p>没有找到相关博文。</p>
           <a
             href="/tags"
             class="text-blue-600 dark:text-blue-400 hover:underline"
           >
-            ← Back to all tags
+            ← 返回所有标签
           </a>
         </div>
       )

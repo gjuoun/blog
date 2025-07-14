@@ -1,7 +1,8 @@
 ---
 import "../styles/global.css";
-import Navbar from "./Layout/Navbar.astro";
+import { useTranslations } from "../utils/i18n";
 import Footer from "./Layout/Footer.astro";
+import Navbar from "./Layout/Navbar.astro";
 
 export type PageProps = {
 	title: string;
@@ -13,6 +14,9 @@ export type PageProps = {
 	ogTitle?: string;
 };
 
+const lang = (Astro.currentLocale || "en") as "en" | "zh";
+const t = useTranslations(lang);
+
 const props = Astro.props as PageProps;
 
 const containerClass = `
@@ -23,13 +27,13 @@ max-w-xl mx-auto
 `;
 
 const defaultMeta: PageProps = {
-	title: "Jun's Blog - Blackhodl Universe",
-	description: "This is my blog about my journey learning Astro.",
+	title: t('site.title'),
+	description: t('site.description'),
 	keywords: ["Software", "AI", "Web3", "Blockchain", "Fintech"],
 	author: "Jun",
 	image: "https://blackhodl.xyz/favicon.svg",
 	ogImage: "https://blackhodl.xyz/favicon.svg",
-	ogTitle: "Jun's Blog - Blackhodl Universe",
+	ogTitle: t('site.ogTitle'),
 };
 
 const meta = {
@@ -39,7 +43,7 @@ const meta = {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />

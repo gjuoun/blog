@@ -10,6 +10,14 @@ export default defineConfig({
   site: 'https://blackhodl.xyz',
   base: '.',
 
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'zh'],
+    routing: {
+      prefixDefaultLocale: false
+    }
+  },
+
   vite: {
     plugins: [tailwindcss()]
   },
