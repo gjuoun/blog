@@ -35,13 +35,7 @@ const socials = [
 // Remove locale prefix from pathname to get the base path
 const basePathname = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
 
-const switchLangHref =
-  lang === "en"
-    ? `/zh${basePathname}`
-    : basePathname;
-console.log("current lang", lang);
-console.log("base pathname", basePathname);
-console.log("switch lang href", switchLangHref);
+const switchLangHref = lang === "en" ? `/zh${basePathname}` : basePathname;
 ---
 
 <div id="navbar" class="bg-white dark:bg-gray-900 rounded-xl shadow-lg">
@@ -78,6 +72,10 @@ console.log("switch lang href", switchLangHref);
             )
           }
         </div>
+        <button class="dark:text-amber-400 text-blue-700" id="theme-toggle" aria-label="Toggle theme">
+          <Icon name="theme-dark" class="w-6 h-6 dark:hidden" />
+          <Icon name="theme-light" class="w-6 h-6 hidden dark:block" />
+        </button>
         {
           socials.map((social) => (
             <a href={social.href} target="_blank" rel="noopener noreferrer">
@@ -89,3 +87,55 @@ console.log("switch lang href", switchLangHref);
     </li>
   </ul>
 </div>
+
+<script>
+  function initTheme() {
+    // Check if theme is stored in localStorage or system preference
+    const savedTheme = localStorage.getItem("theme");
+    const systemDark = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
+
+    if (savedTheme === "dark" || (!savedTheme && systemDark)) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }
+
+  function toggleTheme() {
+    const isDark = document.documentElement.classList.contains("dark");
+
+    if (isDark) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    }
+  }
+
+  // Initialize theme immediately
+  initTheme();
+
+  // Add event listener to toggle button
+  function setupThemeToggle() {
+    const themeToggle = document.getElementById("theme-toggle");
+    if (themeToggle) {
+      themeToggle.addEventListener("click", toggleTheme);
+    }
+  }
+
+  // Setup when DOM is ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupThemeToggle);
+  } else {
+    setupThemeToggle();
+  }
+
+  // Re-setup when navigating between pages (Astro specific)
+  document.addEventListener("astro:page-load", () => {
+    initTheme();
+    setupThemeToggle();
+  });
+</script>
