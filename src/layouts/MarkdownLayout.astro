@@ -37,7 +37,9 @@ const lang = (Astro.currentLocale || "en") as "en" | "zh";
         {
           frontmatter.pubDate && (
             <p class="mt-0">
-              Written on {frontmatter.pubDate.toString().slice(0, 10)}
+              {lang === "zh"
+                ? `写于 ${frontmatter.pubDate.toString().slice(0, 10)}`
+                : `Written on ${frontmatter.pubDate.toString().slice(0, 10)}`}
             </p>
           )
         }
