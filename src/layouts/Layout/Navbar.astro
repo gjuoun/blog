@@ -1,18 +1,23 @@
 ---
+import { getRelativeLocaleUrl } from "astro:i18n";
 import { Icon } from "astro-icon/components";
+import { useTranslations } from "../../utils/i18n";
+
+const lang = (Astro.currentLocale || "en") as "en" | "zh";
+const t = useTranslations(lang);
 
 const routes = [
   {
-    name: "Home",
-    href: "/",
+    name: t("nav.home"),
+    href: getRelativeLocaleUrl(lang, "/"),
   },
   {
-    name: "Blog",
-    href: "/blog",
+    name: t("nav.blog"),
+    href: getRelativeLocaleUrl(lang, "/blog"),
   },
   {
-    name: "About",
-    href: "/about",
+    name: t("nav.about"),
+    href: getRelativeLocaleUrl(lang, "/about"),
   },
 ];
 
@@ -26,6 +31,17 @@ const socials = [
     href: "https://www.linkedin.com/in/gjuoun/",
   },
 ];
+
+// Remove locale prefix from pathname to get the base path
+const basePathname = Astro.url.pathname.replace(/^\/(en|zh)/, "") || "/";
+
+const switchLangHref =
+  lang === "en"
+    ? `/zh${basePathname}`
+    : basePathname;
+console.log("current lang", lang);
+console.log("base pathname", basePathname);
+console.log("switch lang href", switchLangHref);
 ---
 
 <div id="navbar" class="bg-white dark:bg-gray-900 rounded-xl shadow-lg">
@@ -42,13 +58,25 @@ const socials = [
     <li class="py-4">
       <div class="flex gap-2 px-4">
         <div class="grid grid-flow-col gap-1 items-center">
-          <a href="/" class="col-span-1">
-            <span class="text-blue-400">EN</span>
-          </a>
-          <span class="col-span-1">|</span>
-          <a href="/" class="col-span-1">
-            <span>中文</span>
-          </a>
+          {
+            lang === "en" ? (
+              <>
+                <span class="text-blue-400 col-span-1">EN</span>
+                <span class="col-span-1">|</span>
+                <a href={switchLangHref} class="col-span-1 hover:text-blue-400">
+                  <span>中文</span>
+                </a>
+              </>
+            ) : (
+              <>
+                <a href={switchLangHref} class="col-span-1 hover:text-blue-400">
+                  <span>EN</span>
+                </a>
+                <span class="col-span-1">|</span>
+                <span class="text-blue-400 col-span-1">中文</span>
+              </>
+            )
+          }
         </div>
         {
           socials.map((social) => (

@@ -1,6 +1,6 @@
 ---
 layout: ../layouts/MarkdownLayout.astro
-title: 'About Jun'
+title: 'About Jun Guo'
 description: 'A brief introduction to Jun.'
 
 ---

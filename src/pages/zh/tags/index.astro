@@ -1,10 +1,13 @@
 ---
-import Card from "../../components/Card.astro";
-import Layout from "../../layouts/Layout.astro";
+import { getRelativeLocaleUrl } from "astro/virtual-modules/i18n.js";
+import Card from "../../../components/Card.astro";
+import Layout from "../../../layouts/Layout.astro";
 import type { LoadedFile } from "../blog.astro";
+
 const allPosts: LoadedFile[] = Object.values(
   import.meta.glob("../posts/*.md", { eager: true }),
 );
+const lang = (Astro.currentLocale || "en") as "en" | "zh";
 const tags = [...new Set(allPosts.flatMap((post) => post.frontmatter.tags))];
 
 console.log(tags);
@@ -12,9 +15,13 @@ console.log(tags);
 
 <Layout title="Tags" description="Tags" author="Jun Guo">
   <Card id="tags-container" prose>
-    <h1 class="text-2xl font-bold">Tags</h1>
+    <h1 class="text-2xl font-bold">标签</h1>
     <div class="flex flex-wrap gap-2">
-      {tags.map((tag) => <a href={`/tags/${tag}`}>{tag}</a>)}
+      {
+        tags.map((tag) => (
+          <a href={getRelativeLocaleUrl(lang, `/tags/${tag}`)}>{tag}</a>
+        ))
+      }
     </div>
   </Card>
 </Layout>
