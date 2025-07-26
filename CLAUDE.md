@@ -16,6 +16,8 @@ All commands use Bun as the package manager:
 - `bun preview` - Preview production build locally
 - `bun astro check` - Type check the project
 
+Note: The package.json uses npm scripts, but Bun is the preferred runtime for this project.
+
 ## Architecture
 
 ### Layout System
@@ -30,9 +32,11 @@ All commands use Bun as the package manager:
 ### Key Features
 - Blog post listing with dynamic import (`import.meta.glob("./posts/*.md")`)
 - Tag-based categorization system (`src/pages/tags/`)
-- Bilingual content support (English/Chinese variants)
+- Bilingual content support (English/Chinese variants with `src/pages/zh/` structure)
 - SEO-optimized with Open Graph metadata
 - Dark mode styling with TailwindCSS
+- Automatic locale detection via middleware (`src/middleware.ts`)
+- Astro i18n configuration with English default and Chinese prefix routing
 
 ### Frontmatter Schema
 Blog posts require:
@@ -55,6 +59,22 @@ image?: { url: string, alt: string }
 ## File Organization
 
 - Blog posts go in `src/pages/posts/` as `.md` files
+- Chinese variants in `src/pages/zh/posts/` with identical structure
 - Static assets in `public/`
 - Icons in `src/icons/` (SVG format)
 - Components follow naming convention: PascalCase.astro
+
+## Internationalization (i18n)
+
+The site supports English (default) and Chinese locales:
+
+- **Translation System**: `src/utils/i18n.ts` provides `useTranslations()` function
+- **Middleware**: `src/middleware.ts` handles automatic redirect to Chinese for zh-preferring browsers
+- **URL Structure**: English uses root paths, Chinese uses `/zh/` prefix
+- **Content Duplication**: Each page/post needs both English and Chinese versions
+- **Astro i18n Config**: Set in `astro.config.mjs` with `prefixDefaultLocale: false`
+
+When creating new content:
+1. Create English version in standard location (e.g., `src/pages/posts/`)
+2. Create Chinese version in `src/pages/zh/` equivalent path
+3. Use `getRelativeLocaleUrl()` for locale-aware internal links
