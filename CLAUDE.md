@@ -34,7 +34,7 @@ Note: The package.json uses npm scripts, but Bun is the preferred runtime for th
 - Tag-based categorization system (`src/pages/tags/`)
 - Bilingual content support (English/Chinese variants with `src/pages/zh/` structure)
 - SEO-optimized with Open Graph metadata
-- Dark mode styling with TailwindCSS
+- Dark mode styling with TailwindCSS (flash-free thanks to inline theme script)
 - Automatic locale detection via middleware (`src/middleware.ts`)
 - Astro i18n configuration with English default and Chinese prefix routing
 
@@ -55,6 +55,15 @@ image?: { url: string, alt: string }
 - Typography plugin for prose content
 - Global styles in `src/styles/global.css`
 - Dark mode classes: `dark:bg-gray-800`, `dark:text-gray-100`
+
+### Dark-mode implementation
+
+The `dark` class is applied by `src/components/ThemeScript.astro`. The script is
+marked with `is:inline`, ensuring it runs before first paint and prevents a
+white flash for dark-theme visitors.
+
+If you change or relocate this script, remember to keep `is:inline`; otherwise
+Astro will bundle it as a separate file that executes too late.
 
 ## File Organization
 
