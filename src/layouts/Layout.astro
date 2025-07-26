@@ -20,6 +20,29 @@ const t = useTranslations(lang);
 
 const props = Astro.props as PageProps;
 
+// Generate canonical and hreflang URLs
+const currentUrl = new URL(Astro.url.pathname, Astro.site);
+const canonicalUrl = currentUrl.href;
+
+// Generate alternate language URLs
+const alternateUrls = new Map();
+const locales = ["en", "zh"];
+
+for (const locale of locales) {
+	if (locale === "en") {
+		// English is the default locale, no prefix
+		const path = Astro.url.pathname.replace(/^\/zh/, '') || '/';
+		alternateUrls.set("en", new URL(path, Astro.site).href);
+	} else {
+		// Other locales have prefix
+		let path = Astro.url.pathname;
+		if (!path.startsWith('/zh')) {
+			path = path === '/' ? '/zh' : `/zh${path}`;
+		}
+		alternateUrls.set("zh", new URL(path, Astro.site).href);
+	}
+}
+
 const containerClass = `
 min-h-screen bg-white dark:bg-gray-800 
 text-gray-900 dark:text-gray-100
@@ -49,6 +72,10 @@ const meta = {
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="canonical" href={canonicalUrl} />
+		{locales.map((locale) => (
+			<link rel="alternate" hreflang={locale} href={alternateUrls.get(locale)} />
+		))}
 		<meta name="generator" content={Astro.generator} />
 		<title>{meta.title}</title>
 		<meta name="description" content={meta.description} />

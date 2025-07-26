@@ -3,7 +3,7 @@ import BlogPost from "../../components/BlogPost.astro";
 import Card from "../../components/Card.astro";
 import Layout from "../../layouts/Layout.astro";
 import type { MarkdownPageProps } from "../../layouts/MarkdownLayout.astro";
-const lang = (Astro.currentLocale || "en") as "en" | "zh";
+
 
 const allPosts: LoadedFile[] = Object.values(
   import.meta.glob("./posts/*.md", { eager: true }),

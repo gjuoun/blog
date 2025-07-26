@@ -1,0 +1,9 @@
+{
+  "nav.home": "Home",
+  "nav.blog": "Blog", 
+  "nav.about": "About",
+  "nav.tags": "Tags",
+  "site.title": "Jun's Blog - Blackhodl Universe",
+  "site.description": "This is my blog about my journey learning Astro.",
+  "site.ogTitle": "Jun's Blog - Blackhodl Universe"
+}

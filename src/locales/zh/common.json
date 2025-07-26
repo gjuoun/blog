@@ -1,0 +1,9 @@
+{
+  "nav.home": "首页",
+  "nav.blog": "博客",
+  "nav.about": "关于", 
+  "nav.tags": "标签",
+  "site.title": "Jun 的博客 - Blackhodl Universe",
+  "site.description": "这是我的博客，记录我学习 Astro 的旅程。",
+  "site.ogTitle": "Jun 的博客 - Blackhodl Universe"
+}
