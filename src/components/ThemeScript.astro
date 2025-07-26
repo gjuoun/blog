@@ -1,0 +1,22 @@
+<!--
+  This inline script needs to run **before** the first paint to avoid the notorious
+  "flash of un-themed content" when the user has dark-mode turned on. In Astro a
+  plain <script> tag placed inside a component is compiled into a separate
+  module that is loaded **after** the HTML is parsed. That is too late – the
+  page has already flashed.
+
+  Adding the `is:inline` attribute tells Astro to leave the script exactly where
+  it is in the markup so it executes immediately while the browser is still
+  constructing the DOM.
+-->
+<script is:inline>
+(function () {
+  const saved = localStorage.getItem('theme');
+  const dark =
+    saved === 'dark' || (!saved && matchMedia('(prefers-color-scheme: dark)').matches);
+
+  if (dark) {
+    document.documentElement.classList.add('dark');
+  }
+})();
+</script>

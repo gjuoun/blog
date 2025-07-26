@@ -3,6 +3,7 @@ import "../styles/global.css";
 import { useTranslations } from "../utils/i18n";
 import Footer from "./Layout/Footer.astro";
 import Navbar from "./Layout/Navbar.astro";
+import ThemeScript from "../components/ThemeScript.astro";
 
 export type PageProps = {
 	title: string;
@@ -56,6 +57,7 @@ const meta = {
 		<meta property="og:image" content={meta.image} />
 		<meta property="og:title" content={meta.ogTitle} />
 		<meta property="og:description" content={meta.description} />
+		<ThemeScript />
 	</head>
 	<body class={containerClass}>
 		<Navbar />

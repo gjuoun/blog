@@ -89,53 +89,14 @@ const switchLangHref = lang === "en" ? `/zh${basePathname}` : basePathname;
 </div>
 
 <script>
-  function initTheme() {
-    // Check if theme is stored in localStorage or system preference
-    const savedTheme = localStorage.getItem("theme");
-    const systemDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
+function toggleTheme() {
+  const isDark = document.documentElement.classList.contains("dark");
+  document.documentElement.classList.toggle("dark", !isDark);
+  localStorage.setItem("theme", isDark ? "light" : "dark");
+}
 
-    if (savedTheme === "dark" || (!savedTheme && systemDark)) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }
-
-  function toggleTheme() {
-    const isDark = document.documentElement.classList.contains("dark");
-
-    if (isDark) {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    } else {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    }
-  }
-
-  // Initialize theme immediately
-  initTheme();
-
-  // Add event listener to toggle button
-  function setupThemeToggle() {
-    const themeToggle = document.getElementById("theme-toggle");
-    if (themeToggle) {
-      themeToggle.addEventListener("click", toggleTheme);
-    }
-  }
-
-  // Setup when DOM is ready
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", setupThemeToggle);
-  } else {
-    setupThemeToggle();
-  }
-
-  // Re-setup when navigating between pages (Astro specific)
-  document.addEventListener("astro:page-load", () => {
-    initTheme();
-    setupThemeToggle();
-  });
+document.addEventListener('click', e => {
+  const target = e.target as HTMLElement;
+  if (target.closest('#theme-toggle')) toggleTheme();
+});
 </script>
