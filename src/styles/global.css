@@ -1,4 +1,10 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@theme {
+  --color-primary-light: oklch(0.814 0.061 252.63);
+  --color-primary: oklch(0.57 0.148 252.63);
+  --color-primary-dark: oklch(0.494 0.159 252.63);
+}
+
 @variant dark (&:where(.dark, .dark *));

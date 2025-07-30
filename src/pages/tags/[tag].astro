@@ -52,7 +52,7 @@ const { posts } = Astro.props as Props;
     <div class="mb-4">
       <h1 class="text-2xl font-bold mb-2">
         Posts tagged with <span
-          class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded font-mono text-blue-600 dark:text-blue-400"
+          class="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded font-mono text-primary dark:text-primary"
           >{tag}</span
         >
       </h1>
@@ -72,7 +72,7 @@ const { posts } = Astro.props as Props;
           <p>No posts found with this tag.</p>
           <a
             href="/tags"
-            class="text-blue-600 dark:text-blue-400 hover:underline"
+            class="text-primary dark:text-primary hover:underline"
           >
             ← Back to all tags
           </a>
