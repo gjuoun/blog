@@ -1,0 +1,43 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import type { Props as ProjectCardProps } from "../components/ProjectCard.astro";
+
+type Project = ProjectCardProps;
+
+const projects: Project[] = [
+	{
+		name: "AWS SDK V3 Nest",
+		description:
+			"AWS SDK V3 dynamic module for NestJS with async registration and multi-client support.",
+		url: "https://github.com/deligenius/aws-sdk-v3-nest",
+		tags: ["TypeScript", "Node.js", "NestJS", "AWS"],
+	},
+	{
+		name: "Depsi",
+		description: "Progressive dependency injection framework for Express.js",
+		url: "https://github.com/deligenius/depsi",
+		tags: ["TypeScript", "Node.js", "Express", "Dependency Injection"],
+	},
+	{
+		name: "Oolong",
+		description: "Simple & efficient state management library for React.js",
+		url: "https://github.com/deligenius/oolong",
+		tags: ["JavaScript", "React", "State Management"],
+	},
+	{
+		name: "View Engine",
+		description: "A template view engine for Deno frameworks",
+		url: "https://github.com/deligenius/view-engine",
+		tags: ["JavaScript", "Deno", "Templating", "Oak"],
+	},
+];
+---
+
+<Layout title="Projects" description="A selection of projects by Jun." keywords={["projects"]} author="Jun" image="/favicon.svg">
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {projects.map((p) => (
+      <ProjectCard {...p} />
+    ))}
+  </section>
+</Layout>
