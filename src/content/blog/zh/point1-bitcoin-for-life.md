@@ -1,14 +1,13 @@
 ---
-layout: ../../../layouts/MarkdownLayout.astro
-title: '为什么我给孩子们留了0.1个比特币'
-description: '一个父亲讲述为何为孩子的未来选择了比特币这一投资'
-author: 'Jun Guo'
-
+title: 为什么我给孩子们留了0.1个比特币
+description: 一个父亲讲述为何为孩子的未来选择了比特币这一投资
+author: Jun Guo
 pubDate: 2025-07-08
-# image:
-#     url: 'https://docs.astro.build/assets/rose.webp'
-#     alt: 'The Astro logo on a dark background with a pink glow.'
-tags: ["bitcoin", "crypto", "investment", "life"]
+tags:
+  - bitcoin
+  - crypto
+  - investment
+  - life
 ---
 
 作为一个对科技充满热情的家长，我选择持有0.1个比特币，为孩子们铺就更加光明的未来。我认为，比特币凭借其令人瞩目的成长历程、日益增强的机构认可以及相较传统资产（如黄金）所具备的独特优势，这笔看似小额的投资，会在未来带来意想不到的收获。

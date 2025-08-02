@@ -1,4 +1,5 @@
 ---
+import { getCollection } from 'astro:content';
 import BlogPost from "../../components/BlogPost.astro";
 import Card from "../../components/Card.astro";
 import Layout from "../../layouts/Layout.astro";
@@ -10,19 +11,23 @@ type LoadedFile = {
 };
 
 export async function getStaticPaths() {
-  const allPosts = Object.values(
-    import.meta.glob("../posts/*.md", { eager: true }),
-  ) as LoadedFile[];
+  const blogEntries = await getCollection('blog', ({ id }) => {
+    return id.startsWith('en/');
+  });
 
   // Create a map of tags to their associated posts for better performance
   const tagToPostsMap = new Map<string, LoadedFile[]>();
 
-  for (const post of allPosts) {
-    if (post.frontmatter.tags) {
-      for (const tag of post.frontmatter.tags) {
+  for (const entry of blogEntries) {
+    if (entry.data.tags) {
+      for (const tag of entry.data.tags) {
         if (!tagToPostsMap.has(tag)) {
           tagToPostsMap.set(tag, []);
         }
+        const post: LoadedFile = {
+          frontmatter: entry.data as MarkdownPageProps,
+          url: `/blog/${entry.slug.replace('en/', '')}`,
+        };
         tagToPostsMap.get(tag)?.push(post);
       }
     }
