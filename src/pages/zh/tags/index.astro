@@ -1,14 +1,15 @@
 ---
+import { getCollection } from 'astro:content';
 import { getRelativeLocaleUrl } from "astro/virtual-modules/i18n.js";
 import Card from "../../../components/Card.astro";
 import Layout from "../../../layouts/Layout.astro";
-import type { LoadedFile } from "../blog.astro";
 
-const allPosts: LoadedFile[] = Object.values(
-  import.meta.glob("../posts/*.md", { eager: true }),
-);
-const lang = (Astro.currentLocale || "en") as "en" | "zh";
-const tags = [...new Set(allPosts.flatMap((post) => post.frontmatter.tags))];
+const blogEntries = await getCollection('blog', ({ id }) => {
+  return id.startsWith('zh/');
+});
+
+const lang = (Astro.currentLocale || "zh") as "en" | "zh";
+const tags = [...new Set(blogEntries.flatMap((entry) => entry.data.tags).filter(Boolean))];
 
 console.log(tags);
 ---

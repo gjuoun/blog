@@ -1,12 +1,21 @@
 ---
+import { getCollection } from 'astro:content';
 import BlogPost from "../components/BlogPost.astro";
 import Card from "../components/Card.astro";
 import Layout from "../layouts/Layout.astro";
 import type { MarkdownPageProps } from "../layouts/MarkdownLayout.astro";
 
-const allPosts: LoadedFile[] = Object.values(
-  import.meta.glob("./posts/*.md", { eager: true }),
-);
+const blogEntries = await getCollection('blog', ({ id }) => {
+  return id.startsWith('en/');
+});
+
+// Sort by publication date (newest first)
+const allPosts = blogEntries
+  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
+  .map(entry => ({
+    frontmatter: entry.data as MarkdownPageProps,
+    url: `/blog/${entry.slug.replace('en/', '')}`,
+  }));
 
 export type LoadedFile = {
   frontmatter: MarkdownPageProps;
