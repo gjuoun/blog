@@ -1,0 +1,31 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/Card.astro";
+
+const projects = [
+  {
+    name: "Claude 博客",
+    description: "使用 Astro 构建的个人双语博客，支持暗黑模式。",
+    url: "https://blackhodl.xyz",
+  },
+  {
+    name: "GPT 资产分析器",
+    description: "AI 工具，用于总结加密资产组合并提出优化建议。",
+    url: "https://github.com/gjuoun/gpt-portfolio-analyzer",
+  },
+] as const;
+---
+
+<Layout title="项目" description="Jun 的项目精选" keywords={["项目"]} author="Jun" image="/favicon.svg">
+  <h1 class="text-3xl font-bold mb-6">项目</h1>
+  <Card grid>
+    {
+      projects.map((p) => (
+        <a href={p.url} target="_blank" rel="noopener noreferrer" class="p-4 border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+          <h2 class="text-xl font-semibold mb-2">{p.name}</h2>
+          <p>{p.description}</p>
+        </a>
+      ))
+    }
+  </Card>
+</Layout>

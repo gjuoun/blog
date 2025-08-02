@@ -1,6 +1,7 @@
 export const Routes = {
   home: "/",
   blog: "/blog",
+  projects: "/projects",
   about: "/about",
   tags: "/tags",
   point1BitcoinForLife: "/posts/point1-bitcoin-for-life",
@@ -8,6 +9,7 @@ export const Routes = {
     home: "/zh",
     blog: "/zh/blog",
     about: "/zh/about",
+    projects: "/zh/projects",
     tags: "/zh/tags",
     point1BitcoinForLife: "/zh/posts/point1-bitcoin-for-life",
   }
