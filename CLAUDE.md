@@ -40,7 +40,6 @@ Note: The package.json uses npm scripts, but Bun is the preferred runtime for th
 - SEO-optimized with Open Graph metadata
 - Dark mode styling with TailwindCSS (flash-free thanks to inline theme script)
 - Color theme toggle with persisted preference (`src/components/ThemeToggle.astro`)
-- Automatic locale detection via middleware (`src/middleware.ts`)
 - Language switcher in navbar (`src/components/LangSwitcher.astro`)
 - Astro i18n configuration with English default and Chinese prefix routing
 - Centralized route management via `src/utils/routes.ts`
@@ -127,7 +126,6 @@ The site supports English (default) and Chinese locales:
 - **Translation System**: `src/utils/i18n.ts` provides `useTranslations()` function with fallback to English
 - **Translation Data**: static key–value pairs live in `src/locales/translations.ts`
 - **Translation Keys**: Follow pattern like `nav.home`, `site.title` for organization
-- **Middleware**: `src/middleware.ts` handles automatic redirect to Chinese for zh-preferring browsers
 - **URL Structure**: English uses root paths, Chinese uses `/zh/` prefix
 - **Content Duplication**: Each page/post needs both English and Chinese versions
 - **Astro i18n Config**: Set in `astro.config.mjs` with `prefixDefaultLocale: false`
