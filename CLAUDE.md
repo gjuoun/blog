@@ -16,6 +16,9 @@ All commands use Bun as the package manager:
 - `bun preview` - Preview production build locally
 - `bun astro check` - Type check the project
 
+### Deployment
+The site automatically deploys to GitHub Pages via GitHub Actions on push to main branch. The workflow uses Bun for all operations and deploys to https://blackhodl.xyz.
+
 Note: The package.json uses npm scripts, but Bun is the preferred runtime for this project.
 
 ## Architecture
@@ -31,7 +34,8 @@ Note: The package.json uses npm scripts, but Bun is the preferred runtime for th
 
 ### Key Features
 - Blog post listing with dynamic import (`import.meta.glob("./posts/*.md")`)
-- Tag-based categorization system (`src/pages/tags/`)
+- Tag-based categorization system (`src/pages/tags/`) with dynamic routing via `[tag].astro`
+- Projects page with ProjectCard components and color-coded technology tags
 - Bilingual content support (English/Chinese variants with `src/pages/zh/` structure)
 - SEO-optimized with Open Graph metadata
 - Dark mode styling with TailwindCSS (flash-free thanks to inline theme script)
@@ -39,6 +43,7 @@ Note: The package.json uses npm scripts, but Bun is the preferred runtime for th
 - Automatic locale detection via middleware (`src/middleware.ts`)
 - Language switcher in navbar (`src/components/LangSwitcher.astro`)
 - Astro i18n configuration with English default and Chinese prefix routing
+- Centralized route management via `src/utils/routes.ts`
 
 ### Frontmatter Schema
 Blog posts require:
@@ -49,14 +54,29 @@ description: string
 author: string
 pubDate: Date
 tags: string[]
-image?: { url: string, alt: string }
+image: { url: string, alt: string }
+location?: string
 ```
+
+The `image` field is required in the MarkdownLayout type definition, and `location` is optional for additional context.
 
 ### Styling
 - TailwindCSS v4 with Vite integration
 - Typography plugin for prose content
 - Global styles in `src/styles/global.css`
 - Dark mode classes: `dark:bg-gray-800`, `dark:text-gray-100`
+
+### Component Patterns
+- **Card Component**: Reusable wrapper with props for `prose` (typography) and `grid` layouts
+- **ProjectCard Component**: Specialized card for project showcase with color-coded technology tags
+- **BlogPost Component**: Renders blog post previews with metadata and links
+- All components use TypeScript interfaces and support `class` prop for custom styling
+
+### Route Management
+- Centralized route definitions in `src/utils/routes.ts`
+- Supports both English and Chinese route variants
+- Exported as `Routes` and `route` for easy access
+- Used throughout the application for consistent navigation
 
 ### Dark-mode implementation
 
@@ -75,12 +95,38 @@ Astro will bundle it as a separate file that executes too late.
 - Icons in `src/icons/` (SVG format)
 - Components follow naming convention: PascalCase.astro
 
+## Implementation Details
+
+### Blog Post System
+- Posts are dynamically loaded using `import.meta.glob("./posts/*.md", { eager: true })`
+- Each markdown file is processed to extract frontmatter and URL
+- Blog listing page uses Card component with `grid` prop for responsive layout
+- Posts use `MarkdownLayout.astro` for consistent styling and metadata
+
+### Tag System
+- Dynamic tag pages via `[tag].astro` in both `/tags/` and `/zh/tags/`
+- ProjectCard includes color-coded technology tags (TypeScript: blue, JavaScript: yellow, etc.)
+- Tag links in blog posts use `getRelativeLocaleUrl()` for locale-aware routing
+- Tag index pages show all available tags with post counts
+
+### Date Formatting
+- Locale-aware date formatting using Intl.DateTimeFormat
+- English: "Written on January 1, 2024" format
+- Chinese: "写于 2024年1月1日" format
+- Handles both Date objects and string date formats
+
+### TypeScript Configuration
+- Extends Astro's strict TypeScript config (`astro/tsconfigs/strict`)
+- Includes `.astro/types.d.ts` for Astro component types
+- Excludes `dist` directory from compilation
+
 ## Internationalization (i18n)
 
 The site supports English (default) and Chinese locales:
 
-- **Translation System**: `src/utils/i18n.ts` provides `useTranslations()` function
+- **Translation System**: `src/utils/i18n.ts` provides `useTranslations()` function with fallback to English
 - **Translation Data**: static key–value pairs live in `src/locales/translations.ts`
+- **Translation Keys**: Follow pattern like `nav.home`, `site.title` for organization
 - **Middleware**: `src/middleware.ts` handles automatic redirect to Chinese for zh-preferring browsers
 - **URL Structure**: English uses root paths, Chinese uses `/zh/` prefix
 - **Content Duplication**: Each page/post needs both English and Chinese versions
