@@ -1,6 +1,5 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { Icon } from "astro-icon/components";
 import { useTranslations } from "../../utils/i18n";
 import { route } from "../../utils/routes";
 
@@ -25,26 +24,11 @@ const routes = [
     href: getRelativeLocaleUrl(lang, route.projects),
   },
 ];
-
-const socials = [
-  {
-    name: "github",
-    href: "https://github.com/gjuoun",
-  },
-  {
-    name: "linkedin",
-    href: "https://www.linkedin.com/in/gjuoun/",
-  },
-];
-
-// Simple language switch
-const basePathname = Astro.url.pathname.replace(/^\/zh/, "");
-const switchLangHref = lang === "en" ? `/zh${basePathname}` : basePathname;
 ---
 
 <div id="navbar" class="bg-white dark:bg-gray-900 rounded-xl shadow-lg">
   <ul
-    class="grid w-full grid-flow-col grid-cols-[1fr_1fr_1fr_max-content] place-items-center"
+    class="grid w-full grid-flow-col grid-cols-4 place-items-center"
   >
     {
       routes.map((route) => (
@@ -53,54 +37,5 @@ const switchLangHref = lang === "en" ? `/zh${basePathname}` : basePathname;
         </li>
       ))
     }
-    <li class="py-4">
-      <div class="flex gap-2 px-4">
-        <div class="grid grid-flow-col gap-1 items-center">
-          {
-            lang === "en" ? (
-              <>
-                <span class="text-primary col-span-1 font-semibold">EN</span>
-                <span class="col-span-1">|</span>
-                <a href={switchLangHref} class="col-span-1 hover:text-primary">
-                  <span>中文</span>
-                </a>
-              </>
-            ) : (
-              <>
-                <a href={switchLangHref} class="col-span-1 hover:text-primary">
-                  <span>EN</span>
-                </a>
-                <span class="col-span-1">|</span>
-                <span class="text-primary col-span-1 font-semibold">中文</span>
-              </>
-            )
-          }
-        </div>
-        <button class="dark:text-amber-400 text-primary" id="theme-toggle" aria-label="Toggle theme">
-          <Icon name="theme-dark" class="w-6 h-6 dark:hidden" />
-          <Icon name="theme-light" class="w-6 h-6 hidden dark:block" />
-        </button>
-        {
-          socials.map((social) => (
-            <a href={social.href} target="_blank" rel="noopener noreferrer">
-              <Icon name={social.name} class="w-6 h-6" />
-            </a>
-          ))
-        }
-      </div>
-    </li>
-  </ul>
+      </ul>
 </div>
-
-<script>
-function toggleTheme() {
-  const isDark = document.documentElement.classList.contains("dark");
-  document.documentElement.classList.toggle("dark", !isDark);
-  localStorage.setItem("theme", isDark ? "light" : "dark");
-}
-
-document.addEventListener('click', e => {
-  const target = e.target as HTMLElement;
-  if (target.closest('#theme-toggle')) toggleTheme();
-});
-</script>

@@ -1,31 +1,42 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Card from "../../components/Card.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import type { Props as ProjectCardProps } from "../../components/ProjectCard.astro";
 
-const projects = [
+type Project = ProjectCardProps;
+
+const projects: Project[] = [
   {
-    name: "Claude 博客",
-    description: "使用 Astro 构建的个人双语博客，支持暗黑模式。",
-    url: "https://blackhodl.xyz",
+    name: "AWS SDK V3 Nest",
+    description: "适用于 NestJS 的 AWS SDK V3 动态模块，支持异步注册和多客户端。",
+    url: "https://github.com/deligenius/aws-sdk-v3-nest",
+    tags: ["TypeScript", "Node.js", "NestJS", "AWS"],
   },
   {
-    name: "GPT 资产分析器",
-    description: "AI 工具，用于总结加密资产组合并提出优化建议。",
-    url: "https://github.com/gjuoun/gpt-portfolio-analyzer",
+    name: "Depsi",
+    description: "面向 Express.js 的渐进式依赖注入框架。",
+    url: "https://github.com/deligenius/depsi",
+    tags: ["TypeScript", "Node.js", "Express", "Dependency Injection"],
+  },
+  {
+    name: "Oolong",
+    description: "轻量高效的 React.js 状态管理库。",
+    url: "https://github.com/deligenius/oolong",
+    tags: ["JavaScript", "React", "State Management"],
+  },
+  {
+    name: "View Engine",
+    description: "面向 Deno 框架的模板引擎库。",
+    url: "https://github.com/deligenius/view-engine",
+    tags: ["JavaScript", "Deno", "Templating", "Oak"],
   },
 ] as const;
 ---
 
 <Layout title="项目" description="Jun 的项目精选" keywords={["项目"]} author="Jun" image="/favicon.svg">
-  <h1 class="text-3xl font-bold mb-6">项目</h1>
-  <Card grid>
-    {
-      projects.map((p) => (
-        <a href={p.url} target="_blank" rel="noopener noreferrer" class="p-4 border rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
-          <h2 class="text-xl font-semibold mb-2">{p.name}</h2>
-          <p>{p.description}</p>
-        </a>
-      ))
-    }
-  </Card>
+  <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {projects.map((p) => (
+      <ProjectCard {...p} />
+    ))}
+  </section>
 </Layout>
