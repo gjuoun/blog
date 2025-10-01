@@ -23,11 +23,11 @@ const lang = (Astro.currentLocale || "en") as "en" | "zh";
 
 // Format date using Intl API
 const formatDate = (date: Date | string, locale: string) => {
-  const dateObj = typeof date === 'string' ? new Date(date) : date;
+  const dateObj = typeof date === "string" ? new Date(date) : date;
   return new Intl.DateTimeFormat(locale, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   }).format(dateObj);
 };
 ---
@@ -40,7 +40,7 @@ const formatDate = (date: Date | string, locale: string) => {
   <Card id={frontmatter.title} prose>
     <article>
       <!-- title -->
-      <h1>{frontmatter.title}</h1>
+      <h1 class="text-3xl">{frontmatter.title}</h1>
       <!-- author and location -->
       <div class="flex flex-col gap-0 text-gray-500">
         {frontmatter.author && <p class="mb-0">{frontmatter.author} </p>}
