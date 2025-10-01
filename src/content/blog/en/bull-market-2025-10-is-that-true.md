@@ -1,5 +1,5 @@
 ---
-title: October 2025: Is the crypto bull market about to begin?
+title: "October 2025: Is the crypto bull market about to begin?"
 description: A short story about why I think 2025 October is the turning point of the crypto bull market
 author: Jun Guo
 pubDate: 2025-09-30

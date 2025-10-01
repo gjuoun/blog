@@ -1,5 +1,5 @@
 ---
-title: 2025 十月，加密牛市要开始了吗？
+title: "2025 十月，加密牛市要开始了吗？"
 description: A short story about why I think 2025 October is the turning point of the crypto bull market
 author: Jun Guo
 pubDate: 2025-09-30
